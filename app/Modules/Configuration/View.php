@@ -43,7 +43,7 @@ class View extends Model
 
         $this->set('template', $template);
 
-        $title = APP_NAME;
+        $title = env('APP_NAME');
         if(isset($vars['title'])) {
             $title .= ' - ' . $vars['title'];
         }
@@ -53,10 +53,9 @@ class View extends Model
             $this->set('vars', $vars);
         }
 
-
-        $loader = new FilesystemLoader(APP_VIEWS_PATH);
+        $loader = new FilesystemLoader(appDir(env('APP_VIEWS_PATH')));
         $twig = new Environment($loader, [
-            'cache' => APP_CACHE_PATH . '\framework\views',
+            'cache' => appDir(env('APP_CACHE_PATH')) . '\framework\views',
             'debug' => true,
         ]);
         $twig->addExtension(new DebugExtension());
