@@ -8,7 +8,8 @@
 	"require": {
 		"twig/twig": "^3.1",
 		"phpoffice/phpword": "^0.18.2",
-		"symfony/var-dumper": "^5.3"
+		"symfony/var-dumper": "^5.3",
+		"vlucas/phpdotenv": "^5.3"
 	},
 	"autoload": {
 		"psr-4": {
@@ -16,7 +17,6 @@
 			"Database\\": "database/"
 		},
 		"files": [
-			"config/application.conf.php",
 			"app/Helpers/helpers.php"
 		]
 	},
