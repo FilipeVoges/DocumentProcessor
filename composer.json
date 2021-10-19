@@ -1,0 +1,26 @@
+{
+	"authors": [
+		{
+			"name": "Filipe Voges",
+			"email": "filipe.vogesh@gmail.com"
+		}
+	],
+	"require": {
+		"twig/twig": "^3.1",
+		"phpoffice/phpword": "^0.18.2",
+		"symfony/var-dumper": "^5.3"
+	},
+	"autoload": {
+		"psr-4": {
+			"App\\": "app/",
+			"Database\\": "database/"
+		},
+		"files": [
+			"config/application.conf.php",
+			"app/Helpers/helpers.php"
+		]
+	},
+	"scripts": {
+		"server": "php -S localhost:8000 -t public/"
+	}
+}
