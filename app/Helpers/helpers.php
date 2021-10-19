@@ -4,6 +4,32 @@ use App\Modules\Connection\Database;
 use Symfony\Component\VarDumper\VarDumper;
 
 /**
+ * @param string $dir
+ * @return string
+ */
+function appDir(string $dir = '') : string {
+    $baseDir = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
+
+    if(!empty($dir)) {
+        $baseDir .= $dir;
+    }
+
+    return $baseDir;
+}
+
+function env($key, $val = NULL) {
+
+    $env = $_ENV[$key] ?: NULL;
+
+    if(!is_null($val)) {
+        $env = $val;
+        $_ENV[$key] = $env;
+    }
+
+    return $env;
+}
+
+/**
  * @param $table
  * @param $fields
  * @param array $filter
@@ -238,11 +264,36 @@ function escape_quotes_substring($str): string
  * @param string $url
  * @param int $exitcode
  */
-function redirect(string $url, int $exitcode = 0)
+function redirect(string $url = '', int $exitcode = 0)
 {
     session_write_close();
-    header("Location: " . APP_URL . "$url");
+    header("Location: " . env('APP_URL') . "$url");
     exit($exitcode);
+}
+
+/**
+ * @param string $fileName
+ * @return array|string|string[]|null
+ */
+function extension(string $fileName) {
+    return preg_replace('/^.*\.([^.]+)$/D', '$1', $fileName);
+}
+
+/**
+ * @param string $filePath
+ */
+function downloadFile(string $filePath) {
+    header('Content-Description: File Transfer');
+    header('Content-Type: application/octet-stream');
+    header('Content-Disposition: attachment; filename='.basename($filePath));
+    header('Content-Transfer-Encoding: binary');
+    header('Expires: 0');
+    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+    header('Pragma: public');
+    header('Content-Length: ' . filesize($filePath));
+    ob_clean();
+    flush();
+    readfile($filePath);
 }
 
 if (!function_exists('dump')) {
