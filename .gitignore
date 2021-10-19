@@ -1,4 +1,2 @@
 /vendor/
 .idea/
-*.lock
-config/application.ini
