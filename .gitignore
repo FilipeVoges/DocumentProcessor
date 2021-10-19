@@ -2,3 +2,4 @@
 .idea/
 *.lock
 config/application.ini
+.env
