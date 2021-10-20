@@ -16,6 +16,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 $path = $_SERVER['PATH_INFO'] ?? '/';
 
 try {
+    dump($method, $path);
     $router = new Router($method, $path);
 
     $router->add('GET', '/', function ($params) {
