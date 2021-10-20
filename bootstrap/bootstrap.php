@@ -14,9 +14,7 @@ if(env('APP_TIMEZONE')) {
 
 $method = $_SERVER['REQUEST_METHOD'];
 $path = $_SERVER['PATH_INFO'] ?? '/';
-if (mb_strtoupper($method) == 'POST') {
-    dd($method);
-}
+
 try {
     $router = new Router($method, $path);
 

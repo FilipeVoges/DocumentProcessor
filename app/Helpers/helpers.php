@@ -262,14 +262,23 @@ function escape_quotes_substring($str): string
 
 /**
  * @param string $url
+ * @return string
+ */
+function url(string $url = '') : string {
+    return env('APP_URL') . "$url";
+}
+
+/**
+ * @param string $url
  * @param int $exitcode
  */
 function redirect(string $url = '', int $exitcode = 0)
 {
     session_write_close();
-    header("Location: " . env('APP_URL') . "$url");
+    header("Location: " . url($url));
     exit($exitcode);
 }
+
 
 /**
  * @param string $fileName

@@ -3,7 +3,7 @@
 {% block content %}
     <hr>
     <div class="row col-12">
-        <form action="download" method="POST" class="col-12">
+        <form action="{{ url('download') }}" method="POST" class="col-12">
             <input type="hidden" name="filename" value="{{ fileName }}">
             {% for fileVar in fileVars %}
                 <div class="form-group row">
