@@ -13,9 +13,8 @@ if(env('APP_TIMEZONE')) {
 }
 
 $method = $_SERVER['REQUEST_METHOD'];
-$path = $_SERVER['PATH_INFO'] ?? '/';
+$path = $_SERVER['REQUEST_URI'] ?? '/';
 
-dump($method, $path, $_SERVER);
 try {
     $router = new Router($method, $path);
 
