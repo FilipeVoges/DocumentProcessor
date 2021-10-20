@@ -13,7 +13,7 @@ if(env('APP_TIMEZONE')) {
 }
 
 $method = $_SERVER['REQUEST_METHOD'];
-$path = $_SERVER['PATH_INFO'] ?? '/';
+$path = $_SERVER['REQUEST_URI'] ?? '/';
 
 try {
     $router = new Router($method, $path);
@@ -40,6 +40,6 @@ try {
 
     echo $result($router->get('params'));
 } catch (Exception $e) {
-
+    dd($e);
 }
 
