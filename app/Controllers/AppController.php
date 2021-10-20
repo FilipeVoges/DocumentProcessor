@@ -5,6 +5,8 @@ namespace App\Controllers;
 
 use App\Modules\Configuration\View;
 use Exception;
+use PhpOffice\PhpWord\Exception\CopyFileException;
+use PhpOffice\PhpWord\Exception\CreateTemporaryFileException;
 use PhpOffice\PhpWord\TemplateProcessor;
 
 /**
@@ -50,6 +52,10 @@ class AppController extends Controller
         }
     }
 
+    /**
+     * @throws CopyFileException
+     * @throws CreateTemporaryFileException
+     */
     public static function download() {
         $filename = $_POST['filename'] ?: NULL;
         if(is_null($filename)) {
@@ -68,6 +74,6 @@ class AppController extends Controller
         $newFileName = 'PROCESSED_' . $filename;
         $newFilePath = $directory . $newFileName;
         $fileProcess->saveAs($newFilePath);
-        downloadFile($newFileName);
+        downloadFile($newFilePath);
     }
 }
