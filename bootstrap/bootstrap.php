@@ -40,6 +40,6 @@ try {
 
     echo $result($router->get('params'));
 } catch (Exception $e) {
-
+    dd($e);
 }
 
