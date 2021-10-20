@@ -3,7 +3,14 @@
 require_once getcwd() . '/../vendor/autoload.php';
 
 use App\Modules\Configuration\Router;
-use App\Controllers\HomeController;
+use App\Controllers\AppController;
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../");
+$dotenv->load();
+
+if(env('APP_TIMEZONE')) {
+    date_default_timezone_set(env('APP_TIMEZONE'));
+}
 
 $method = $_SERVER['REQUEST_METHOD'];
 $path = $_SERVER['PATH_INFO'] ?? '/';
@@ -12,9 +19,16 @@ try {
     $router = new Router($method, $path);
 
     $router->add('GET', '/', function ($params) {
-        return HomeController::home();
+        return AppController::home();
     });
 
+    $router->add('POST', '/process', function ($params) {
+        return AppController::process();
+    });
+
+    $router->add('POST', '/download', function ($params) {
+        return AppController::download();
+    });
 
     $result = $router->handler();
 
