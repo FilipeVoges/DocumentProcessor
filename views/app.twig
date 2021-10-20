@@ -1,14 +1,13 @@
 <html>
     <head>
         <title>{{ title }}</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href={{ url("css/bootstrap.min.css") }} rel="stylesheet">
     </head>
 
     <body>
         <div class="container">
-
             {% block content %}{% endblock %}
         </div>
-        <script src="js/bootstrap.min.js"></script>
+        <script src={{ url("js/bootstrap.min.js") }}></script>
     </body>
 </html>

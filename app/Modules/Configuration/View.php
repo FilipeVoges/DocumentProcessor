@@ -8,6 +8,7 @@ use Exception;
 use Twig\Environment;
 use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
+use Twig\TwigFunction;
 
 class View extends Model
 {
@@ -59,6 +60,8 @@ class View extends Model
             'debug' => true,
         ]);
         $twig->addExtension(new DebugExtension());
+        $urlFunction = new TwigFunction('url', 'url');
+        $twig->addFunction($urlFunction);
 
         $this->set('twig', $twig);
     }
